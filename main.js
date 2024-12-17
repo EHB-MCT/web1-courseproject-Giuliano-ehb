@@ -42,3 +42,40 @@ document.addEventListener("scroll", () => {
         }
     });
 });
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("main > div");
+    const navLinks = document.querySelectorAll("nav a");
+    const mobileLinks = document.querySelectorAll(".mobile-nav a");
+
+    const setActiveLink = () => {
+        let currentSection = "";
+
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            if (window.scrollY >= sectionTop - sectionHeight / 3) {
+                currentSection = section.getAttribute("id");
+            }
+        });
+
+        [...navLinks, ...mobileLinks].forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${currentSection}`) {
+                link.classList.add("active");
+            }
+        });
+    };
+
+    window.addEventListener("scroll", setActiveLink);
+
+    // Klikken op hamburgermenu links
+    mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            document.querySelector(".mobile-nav").classList.remove("is-active");
+            document.querySelector(".hamburger").classList.remove("is-active");
+        });
+    });
+});

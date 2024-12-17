@@ -126,6 +126,11 @@ header nav a:hover {
     left: 0;
 }
 
+.mobile-nav a.active {
+    color: red;
+    font-weight: bold;
+}
+
 
 
 .grid1 {
